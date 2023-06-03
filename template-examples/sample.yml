@@ -1,0 +1,40 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Sample New Relic AI Notifications Destination Template
+Resources:
+  #
+  # Important note:
+  #   A channel may only belong to one workflow, ensure uniqueness
+  #
+  aiNotificationsDestinationResource:
+    Type: 'NewRelic::Observability::AINotificationsDestination'
+    Properties:
+      Destination: >-
+        destination: {name: "Notification email test", properties: {key: "email", value: "someone@nowhere.com"}, type: EMAIL}
+
+  aiNotificationsChannelResource:
+    Type: 'NewRelic::Observability::AINotificationsChannel'
+    Properties:
+      Channel: >-
+        channel: {
+        destinationId: "{{{DestinationId}}}", 
+        name: "CloudFormation Test Channel", 
+        product: IINT, 
+        properties: {key: "", value: "", displayValue: "CloudFormation Test Channel", label: ""}, 
+        type: EMAIL}
+      Variables:
+        DestinationId: !Ref aiNotificationsDestinationResource
+
+  aiWorkflowsResource:
+    Type: 'NewRelic::Observability::AIWorkflows'
+    Properties:
+      WorkflowData: >-
+        {destinationConfigurations:
+           {channelId: "{{{ChannelId}}}"}, mutingRulesHandling: DONT_NOTIFY_FULLY_MUTED_ISSUES, name: "Stack test workflow", issuesFilter:
+           {name: "Stack test issuesFilter", predicates:
+             {attribute: "accumulations.tag.team", operator: CONTAINS, values: "security"},
+            type: FILTER}, workflowEnabled: false}
+      Variables:
+        ChannelId: !Ref aiNotificationsChannelResource
+Outputs:
+  CustomResourceId:
+    Value: !GetAtt  aiWorkflowsResource.Id
