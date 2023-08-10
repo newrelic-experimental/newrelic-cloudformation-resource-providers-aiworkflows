@@ -1,4 +1,4 @@
 {
- "WorkflowData": "{destinationConfigurations: {channelId: \"{% raw -%}{{{CHANNEL_ID}}}{% endraw %}\"}, mutingRulesHandling: DONT_NOTIFY_FULLY_MUTED_ISSUES, name: \"CloudFormation test workflow\", issuesFilter: {name: \"CloudFormation test issuesFilter\", predicates: {attribute: \"accumulations.tag.team\", operator: CONTAINS, values: \"security\"}, type: FILTER}}",
- "Variables": {"CHANNEL_ID": "73f4c9fc-10d0-4943-bd5a-794d3d87aaae"}
+ "WorkflowData": "{destinationConfigurations: {channelId: \"{% raw -%}{{{CHANNEL_ID}}}{% endraw %}\"}, mutingRulesHandling: DONT_NOTIFY_FULLY_MUTED_ISSUES, name: \"CloudFormation cfn test workflow\", issuesFilter: {name: \"CloudFormation cfn test issuesFilter\", predicates: {attribute: \"accumulations.tag.team\", operator: CONTAINS, values: \"security\"}, type: FILTER}}",
+ "Variables": {"CHANNEL_ID": "0c72061a-5e59-45f7-b4d5-740fe1c8e254"}
 }
